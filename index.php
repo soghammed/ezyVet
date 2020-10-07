@@ -10,9 +10,11 @@
 	 [ "name" => "Hacksaw", "price" => 18.45 ],
 	];
 
+	//get cart and initiate Cart Object;
 	$oldCart = isset($_SESSION['cart']) ? $_SESSION['cart'] : null;
 	$cart = new Cart($oldCart);
 	
+	//url actions start;
 	if(isset($_GET['name']) && isset($_GET['price'])){
 		$item = array(
 			'name' => $_GET['name'],
@@ -26,7 +28,7 @@
 		$cart->remove($_GET['remove']);
 		$_SESSION['cart'] = $cart;
 	}
-
+	//url actions end;
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +36,6 @@
 <head>
 
 	<title>Cart Sample</title>
-	<meta http-equiv="refresh" content="5;url=">
 	<style>
 		body{
 			margin:4rem;

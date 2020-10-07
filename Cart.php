@@ -38,10 +38,17 @@
 		{
 			//if product exists
 			if(isset($this->items[$itemName])){
-				//remove price from total
-				$this->totalPrice-=$this->items[$itemName]['total_price'];
-				//remove item;
-				unset($this->items[$itemName]);
+				
+				//if has qty larger than 1 update qty and stored total prices
+				if($this->items[$itemName]['qty'] > 1){
+					$this->items[$itemName]['qty']--;
+					$this->items[$itemName]['total_price'] = $this->items[$itemName]['price'] * $this->items[$itemName]['qty']; 
+					$this->totalPrice-=$this->items[$itemName]['price'];
+				}else{
+					//else update total cart price & remove item;
+					$this->totalPrice-=$this->items[$itemName]['total_price'];
+					unset($this->items[$itemName]);
+				}
 			}
 		}
 
