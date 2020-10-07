@@ -37,12 +37,15 @@
 
 	<title>Cart Sample</title>
 	<style>
+		button{
+			cursor: pointer;
+		}
 		body{
 			margin:4rem;
 		}
 		.products-grid,.cart-products{
 			display:grid;
-			grid-template-columns: repeat(3, 1fr);
+			grid-template-columns: repeat(4, 1fr);
 			text-align:center;
 		}
 		.product{
@@ -52,6 +55,9 @@
 			background-color:#2d2d2d;
 			color:white;
 		}
+		.product div{
+			margin:.5rem;
+		}
 	</style>
 </head>
 <body>
@@ -60,7 +66,7 @@
 		<?php foreach($products as $product){ ?> 
 			<div class="product">
 				<div>Name: <?php echo $product['name'] ?></div>
-				<div>Price: <?php echo number_format($product['price'], 2, '.', ''); ?></div>
+				<div>Price: £<?php echo number_format($product['price'], 2, '.', ''); ?></div>
 				<div>
 					<a href="?<?php echo http_build_query($product)?>"><button>Add Product</button></a>
 				</div>
@@ -69,14 +75,14 @@
 	</div>
 
 	<?php if($cart->items){ ?>
-		<h2>Cart - Total: <?php echo $cart->totalPrice ?> </h2>
+		<h2>Cart  (Total: £<?php echo  number_format($cart->totalPrice, 2, '.', ''); ?>) </h2>
 		<div class="cart-products">
 			<?php foreach($cart->items as $item){ ?>
 				<div class="product">
 					<div>Name: <?php echo $item['name'] ?></div>
-					<div>Price: <?php echo number_format($item['price'], 2, '.', ''); ?></div>
+					<div>Price: £<?php echo number_format($item['price'], 2, '.', ''); ?></div>
 					<div>Quantity: <?php echo $item['qty'] ?></div>
-					<div>Total: <?php echo number_format($item['total_price'], 2, '.', ''); ?></div>
+					<div>Total: £<?php echo number_format($item['total_price'], 2, '.', ''); ?></div>
 					<div><a href="?remove=<?php echo $item['name'] ?>"><button>Remove</button></a></div>
 				</div>
 			<?php } ?>
